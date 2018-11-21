@@ -4,7 +4,7 @@ An Ethereum Dapp Project about auction
 
 ## 一、初始化项目环境  
 
-###（一）truffle框架介绍及安装  
+### （一）truffle框架介绍及安装  
 Truffle框架就是一个帮助书写编译和发布基于Solidity的智能合约的工具。Truffle具有以下优点：
 
  - 首先对客户端做了深度集成。开发，测试，部署一行命令都可以搞定。不用再记那么多环境地址，繁重的配置更改，及记住诸多的命令。
