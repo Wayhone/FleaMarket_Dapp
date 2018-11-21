@@ -1,4 +1,4 @@
-# An Ethereum Dapp Project about auction / 以太坊拍卖市场Dapp
+# 以太坊拍卖市场Dapp
 
 ## 一、初始化项目环境  
 
@@ -38,6 +38,7 @@ npm install --global node-gyp
 ![solution][5]  
 这次再重建项目目录，就没问题了。  
 ![webpack配置][6]  
+创建好目录后，进入该目录查看文件结构  
 ```
 |--app          // 前端设计，包括html,css,js
 |--build        // 智能合约编译后文件存储路径
