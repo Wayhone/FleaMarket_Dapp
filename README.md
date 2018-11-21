@@ -1,6 +1,4 @@
-# 拍卖市场_以太坊Dapp : auction_Dapp
-An Ethereum Dapp Project about auction
----
+# An Ethereum Dapp Project about auction / 以太坊拍卖市场Dapp
 
 ## 一、初始化项目环境  
 
