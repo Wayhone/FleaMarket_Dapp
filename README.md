@@ -83,7 +83,7 @@ Ganache本质上是一个本地ethereum节点仿真器，分为GUI版本和命�
 ![migrate_error][9]  
 `migrate`命令会将代码部署到区块链上。出现上图的错误是因为没有指定网络，如使用命令`truffle migrate --network ourTestNet`指定部署到私链ourTestNet中。现在我们只需要有一个用于测试的网络就好了，也就是上面所提到过的，使用`truffle develop`。输入该命令，启动测试终端。  
 ![develop][10]
-由图可见，`truffle develop`在https://127.0.0.1:9545端口启动，启动时会给用户生成测试账号，在默认情况下这些测试账号都有 100 个以太币，并且这些以太币都会处于解锁状态，能让我们自由发送它们的以太币。  
+由图可见，`truffle develop`在 https://127.0.0.1:9545 端口启动，启动时会给用户生成测试账号，在默认情况下这些测试账号都有 100 个以太币，并且这些以太币都会处于解锁状态，能让我们自由发送它们的以太币。  
 
 然后这次可以部署合约了，注意在这里执行truffle命令的时候需要省略前面的`truffle`。  
 ![migrate_develop][11]
@@ -96,16 +96,16 @@ Ganache本质上是一个本地ethereum节点仿真器，分为GUI版本和命�
 
 ![getInstance & check the bidders][12]
 
-设置一些变量，包括拍卖起始时间、拍卖结束时间、商品起始价格。这里先获取当前时间，拍卖在3分钟（180s）后开始；拍卖持续5分钟（300s）；商品其实价格为2个以太币。
+设置一些变量，包括拍卖起始时间、拍卖结束时间、商品起始价格。这里先获取当前时间，拍卖在3分钟（180s）后开始；拍卖持续5分钟（300s）；商品初始价格为2个以太币。
 
 ![set the var][13]
 
-用户0开始发布商品iPhone。这里因为测试的缘故，描述图片和描述文字的哈希就没必要放进去了，留到实现前端的时候完善。由图可见，发布该商品花费了 258812 gas。然后使用`getProductNum()`，可以看到当前有一个商品发布再使用`getProduct(1)`，可以看到商品信息。  
+用户0开始发布商品iPhone。这里因为测试的缘故，描述图片和描述文字的哈希就没必要放进去了，留到实现前端的时候完善。由图可见，发布该商品花费了 258812 gas。然后使用`getProductNum()`，可以看到当前有一个商品发布。再使用`getProduct(1)`，可以看到商品信息。  
 
 ![add a product][14]  
 ![get the product][15]
 
-如果在商品开始拍卖前进行投标，操作会被拒绝。在商品发布三分钟后，4个用户要进行投标。先看用户1，以密匙"test1"进行加密，出价1.5倍初始价格，即是3个以太币。投标操作花费 110370 gas。如果用户1还想更改出价/更改竞拍密匙，操作将会被取消。  
+如果在商品开始拍卖前进行投标，操作会被拒绝。在商品发布三分钟后，4个用户要进行投标。先看用户1，以密匙"test1"进行加密，出价1.5倍初始价格，即是3个以太币。投标操作花费 110370 gas。如果用户1还想更改出价/更改竞拍密匙，操作将会被拒绝。  
 
 ![bid][16]
 
@@ -141,7 +141,9 @@ Ganache本质上是一个本地ethereum节点仿真器，分为GUI版本和命�
 
 ![getBuyer][23]  
 
-最后看一下各用户的余额，用户3使用了5个以太币（次高价）获得了该商品。
+最后看一下各用户的余额，用户3使用了5个以太币（次高价）获得了该商品。然后再看一看商品属性，可以看到第四个参数更改为1。这个参数代表的是商品状态枚举型变量，1表示已出售。
+
+![getProduct2][24]
 
 
   [1]: https://nodejs.org/en/
@@ -167,3 +169,4 @@ Ganache本质上是一个本地ethereum节点仿真器，分为GUI版本和命�
   [21]: https://github.com/sysuxwh/MyPictureHost/blob/master/AuctionDapp/test/test_bid4.png
   [22]: https://github.com/sysuxwh/MyPictureHost/blob/master/AuctionDapp/test/test_noBuyerYet.png
   [23]: https://github.com/sysuxwh/MyPictureHost/blob/master/AuctionDapp/test/test_endAuction.png
+  [24]: https://github.com/sysuxwh/MyPictureHost/blob/master/AuctionDapp/test/test_getProduct2.png
