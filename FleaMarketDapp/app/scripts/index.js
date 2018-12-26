@@ -15,7 +15,7 @@ let FleaMarket = contract(fleaMarketArtifact)
 // As your needs grow you will likely need to change its form and structure.
 // For application bootstrapping, check out window.addEventListener below.
 
-window.buyProduct = function(pid)
+window.BuyProduct = function(pid)
 {
 	if (isNaN(pid))
 		return;
@@ -27,24 +27,45 @@ window.buyProduct = function(pid)
 
 			// 解析商品状态
 			if (result[3] == 1) {
-				alert("This product is sold already")
-				return;
+				$('.sold-alert').addClass('sold-alert-show');
+				console.log("Oops")
+				setTimeout(function() {
+					$('.sold-alert').removeClass('sold-alert-show');					
+				}, 2000);	
+				return;			
 			}
 
-			let price = result[4] / 1000000000000000000;
-			ethPrice = web3.toWei(price, 'ether');
+			// 弹窗 确认是否购买
+			$(".mask-div").css('display', 'block'); 
+			$('.confirmation').css('display', 'block'); 
 
-			console.log("Buying product " + pid.toString())
-			console.log("Price is " + ethPrice)
-		
-			FleaMarket.deployed().then(function(contractInstance) {
-				contractInstance.buyProduct(pid, {from: web3.eth.accounts[0], value: ethPrice}).then(function(v) {
-					location.reload();	// 刷新商品信息
-				})
-				.catch(function(err) {
-					err=>{console.warn(err)}
-				});		
+			// 确认购买
+			$('.confirmation-confirm-btn').on("click", function(){ 
+				$(".mask-div").css('display', 'none'); 
+				$('.confirmation').css('display', 'none'); 
+				
+				let price = result[4] / 1000000000000000000;
+				ethPrice = web3.toWei(price, 'ether');
+
+				console.log("Buying product " + pid.toString())
+				console.log("Price is " + ethPrice)
+			
+				FleaMarket.deployed().then(function(contractInstance) {
+					contractInstance.buyProduct(pid, {from: web3.eth.accounts[0], value: ethPrice}).then(function(v) {
+						location.reload();	// 刷新商品信息
+					})
+					.catch(function(err) {
+						err=>{console.warn(err)}
+					});		
+				});
 			});
+
+			// 取消购买
+			$('.confirmation-cancel-btn').on("click", function(){ 
+				$(".mask-div").css('display', 'none'); 
+				$('.confirmation').css('display', 'none'); 
+			});
+			
 		})
 	});
 }
@@ -120,16 +141,16 @@ $(document).ready(function() {
 							let ethPrice = web3.toWei(price, 'ether');
 
 							// 添加到商品列表
-							let li = $('<li class = \'product_item\' onclick="buyProduct(' + pid + ')">\
+							let li = $('<li class = \'product_item\' onclick = "BuyProduct(' + pid +')"\
 											<figure>\
 												' + imgTemp + '\
 												<figcaption>\
 													<h3>' + result[1] + '</h3>\
 													<span>' + result[2] +' </span> <br>\
-													<span class="product_price">' + price +'</span> <br>'
+													<span class="product_price">' + price +' ETH</span> <br>'
 													+ status +
 													'<hr>\
-													<div class="product_description">' + result[5] + '</div>\
+													<div class="product_description"> <strong>Description</strong><br>' + result[5] + '</div>\
 												</figcaption>\
 											</figure>\
 										</li>'); 
@@ -144,3 +165,4 @@ $(document).ready(function() {
 			});		
 		});
 });
+
