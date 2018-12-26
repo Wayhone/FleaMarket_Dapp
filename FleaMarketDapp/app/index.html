@@ -1,0 +1,117 @@
+<!DOCTYPE html>
+<html>
+
+<head>
+    <title>Flea Market DApp</title>
+    <link href='https://fonts.googleapis.com/css?family=Open+Sans:400,700' rel='stylesheet' type='text/css'>
+    <link href='https://maxcdn.bootstrapcdn.com/bootstrap/3.3.7/css/bootstrap.min.css' rel='stylesheet' type='text/css'>
+    <script src="https://cdn.rawgit.com/ethereum/web3.js/develop/dist/web3.js"></script>
+    <script src="https://code.jquery.com/jquery-3.1.1.slim.min.js"></script>
+    <script src="./app.js"></script>
+</head>
+
+<body class="container">
+
+    <!-- / Site Header -->
+    <div class="site-header">
+        <h1>
+            Flea Market
+        </h1>
+
+        <h2>
+            This is an DApp based on Ethereum.<br><br>
+            Here, a market where old or used goods are sold cheaply.<br><br>
+            Also, you can sell your own goods.
+        </h2>
+
+        <a class="btn btn-primary" id = "wannaSell" href = "javascript:void(0)" 
+            onclick = " if ($('.menu').hasClass('onClick')) $('.menu').removeClass('onClick'); else $('.menu').addClass('onClick');">
+            I Want to Sell
+        </a>
+
+        <div class="site-menu">
+            <!-- <div class="icon"></div> -->
+            <div class="menu onClick" id="menu">
+                <div class = "group">
+                    <label> Product Name </label> <br>
+                    <input type="text" class="input" id="product-name" placeholder="Your product name" required="required"></input>
+                </div>
+                <div class = "group">
+                    <label> Category  </label> <br>
+                    <select class="input" id="product-category">
+                        <option>Art</option>
+                        <option>Books</option>
+                        <option>Cameras</option>
+                        <option>Cell Phones</option>
+                        <option>Clothing</option>
+                        <option>Coins & Paper Money</option>
+                        <option>Collectibles</option>
+                        <option>Computers/Tablets & Networking</option>
+                        <option>Consumer Electronics</option>
+                        <option>Crafts</option>
+                        <option>DVDs & Movies</option>
+                        <option>Entertainment Memorabilia</option>
+                        <option>Gift Cards & Coupons</option>
+                        <option>Music</option>
+                        <option>Musical Instruments & Gear</option>
+                        <option>Pet Supplies</option>
+                        <option>Pottery & Glass</option>
+                        <option>Sporting Goods</option>
+                        <option>Stamps</option>
+                        <option>Tickets</option>
+                        <option>Toys & Hobbies</option>
+                        <option>Video Games</option>
+                    </select>
+                </div>
+                <div class = "group">
+                    <label> Price  </label> <br>
+                    <input type="number" class="input"  id="product-price" placeholder="Your price" required="required"></input>
+                </div>
+                <div class = "group">
+                    <label> Description  </label> <br>
+                    <textarea rows="4" class="input" id="product-description" placeholder="Enter detailed product description" required="required"></textarea>
+                </div>
+                <div id="address"></div>
+                <a href="#" onclick="AddProduct()" class="btn btn-primary">Sell the Product</a>
+                <!-- <a class="btn btn-primary" id = "Sell" href = "javascript:void(0)" 
+                    onclick = " var li = $('<li class = \'product_item\'><figure><img src = \'img/product.png\'><figcaption><h3>Music</h3><span>Jacob Cummings</span></figcaption></figure></li>'); $('.product_list').append(li);">
+                    Sell the Product
+                </a> -->
+            </div>
+        </div>
+
+
+        <div class="site-footer">
+            <p>© 2018 sysuxwh</p>
+            <p>Github <a href="http://github.com/sysuxwh/">@sysuxwh</a></p>
+        </div>
+    </div>
+    <!-- \ Site Header -->
+
+    <div class="site-main">
+        <h1>Flea Market</h1>
+
+        <h2>Product List</h2>
+
+        <div id="address"></div>
+
+        <ul class="product_list">
+            <!-- <li class="product_item">
+              <figure>
+                  <img src = "img/product.png">
+                  <figcaption>
+                      <h3>IPhoneXS</h3>
+                      <span>Cell Phones</span> <br>
+                      <span class="product_price">$1000</span> <br>
+                      <span class="product_status_available">Available</span> <br>
+                      <hr>
+                      <div class="product_description">A phone bought at 18.12.1, almost new. A pretty good stuff, strongly recommended</div>
+                  </figcaption>
+              </figure>
+            </li> -->
+        </ul>        
+    </div>
+
+</body>
+
+</html>
