@@ -114,7 +114,7 @@ ul {
 	padding:0px
 }
 .product_item {
-	width: 80%;
+	width: 90%;
 	height: 10%;
 	list-style:none;
 	margin:20px 20px;
@@ -209,7 +209,7 @@ ul {
 
 
 .confirmation {
-    position: absolute;
+    position: fixed;
     left: 40%;
     right: 40%;
     top: 40%;
@@ -258,7 +258,7 @@ ul {
 }
 
 .sold-alert {
-    position: absolute;
+    position: fixed;
     left: 39%;
     right: 39%;
     width: auto;

@@ -51,6 +51,7 @@ window.BuyProduct = function(pid)
 				console.log("Price is " + ethPrice)
 			
 				FleaMarket.deployed().then(function(contractInstance) {
+					console.log("waiting to transact...")
 					contractInstance.buyProduct(pid, {from: web3.eth.accounts[0], value: ethPrice}).then(function(v) {
 						location.reload();	// 刷新商品信息
 					})
