@@ -495,7 +495,7 @@ window.BuyProduct = function(pid)
 
 在步骤五中，已经用户0(0x627306090abab3a6e1400e9345bc60c78a8bef57)已经发布过一本《动物农场》，并由用户1(0xf17f52151ebef6c7334fad080c5704d77216b732)使用1个以太币购买了。接下来，我们将继续在这条链上继续演示。  
 
-注意，truffle develop的控制台不要关，确保我们的测试链在 http://127.0.0.1:9545 启动着，并且部署了智能合约。  
+注意，truffle develop的控制台不要关，确保我们的测试链在 `http://127.0.0.1:9545` 启动着，并且部署了智能合约。  
 
 另开一个控制台，输入 `npm run dev`，启动 FleaMarket 服务。  
 ![启动服务](Img/3_RunService.png)
@@ -507,7 +507,7 @@ window.BuyProduct = function(pid)
 
 MetaMask是一个Google浏览器扩展，可以把Chrome变成一个DApp浏览器。它的核心特性是注入以太坊提供的js客户端库web3到每一个界面，来让DApp连接到MetaMask提供的以太坊节点服务。不过这个Chrome扩展，可以允许你管理你的钱包，以及连接到不同的以太坊网络。  
 
-科学上网后打开Chrome的应用商店，搜索MeatMask即可安装。安装后完成登录操作。MeatMask默认连接的是以太坊主网（最上方显示），点击它，选择Custom RPC，添加一个网络：http://127.0.0.1:9545，点确定后，将会连接到我们的测试链。然后点击右上角的用户头像，选择Import Account,导入三个测试账户的地址，并更改名字，用作之后的测试.
+科学上网后打开Chrome的应用商店，搜索MeatMask即可安装。安装后完成登录操作。MeatMask默认连接的是以太坊主网（最上方显示），点击它，选择Custom RPC，添加一个网络：`http://127.0.0.1:9545` ，点确定后，将会连接到我们的测试链。然后点击右上角的用户头像，选择Import Account,导入三个测试账户的地址，并更改名字，用作之后的测试.
 ```
 0x627306090abab3a6e1400e9345bc60c78a8bef57 // Accounts[0] -> Mr.0
 0xf17f52151ebef6c7334fad080c5704d77216b732 // Accounts[1] -> XW
@@ -537,3 +537,14 @@ MetaMask是一个Google浏览器扩展，可以把Chrome变成一个DApp浏览�
 购买完成后，查看账户余额，可以看到XW用户转账了10个以太币给AnotherXW。XW余额约为89 (90 - 1)，AnotherXW余额约为110 (100 + 1)
 ![Check](Img/3_WebCheckBuy.gif)  
 
+---
+
+途中遇到的一些问题的解决方法：
+- **调用合约时 console 出现 `MetaMask - RPC Error: Internal JSON_RPC error`**
+  - 可能是因为合约更改了或其他的问题，MetaMask没有获取到正确的合约地址，在Truffle里面重新部署合约即可
+- **无法触发发售/购买时间**
+  - 原因是MetaMask的账号锁住了，重新登录即可
+- **确认支付时出现`ALERT: [ethjs-rpc] rpc error with payload `错误**
+  - 原因是智能合约重新部署了，但MetaMask还保留着之前的交易信息等，点击 头像 - Settings - Reset Account，重置一下即可。
+
+---
