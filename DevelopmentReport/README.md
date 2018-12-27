@@ -17,6 +17,10 @@
       - [2. 发布商品](#2-发布商品)
       - [3. 购买商品](#3-购买商品)
     - [七、Flea Market的使用](#七Flea-Market的使用)
+      - [1. 启动服务](#1-启动服务)
+      - [2. 安装及使用MeatMask](#2-安装及使用MeatMask)
+      - [3. 发布商品](#3-发布商品)
+      - [4. 购买商品](#4-购买商品)
 
 ## 一、选题背景
 DApp，即是去中心化应用Decentralized Application。去中心化应用拥有几个主要特点： 
@@ -52,7 +56,7 @@ Truffle是一个DApp开发框架，在一定程度上简化了建构和管理项
 
 **Truffle**  
 以管理员身份打开powershell，输入`npm install -g truffle`安装truffle（图中为VSCode的命令行）。  
-![安装truffle](/Img/1_truffle_install.png)
+![安装truffle](Img/1_truffle_install.png)
 
 > 如果你是Windows用户，那就需要注意：Windows 系统有个命名问题，它会让我们在执行 Truffle 命令的时候只打开配置文件"truffle.js"，而不会读取里面的内容。解决方法是。修改Windows的PATHEXT环境变量，去掉.js后缀，避免以后在Truffle目录下运行"truffle"命令可能遇到的麻烦。
 
@@ -487,4 +491,49 @@ window.BuyProduct = function(pid)
 
 ## 七、Flea Market的使用  
 
-困了困了...明天继续写
+### 1. 启动服务
+
+在步骤五中，已经用户0(0x627306090abab3a6e1400e9345bc60c78a8bef57)已经发布过一本《动物农场》，并由用户1(0xf17f52151ebef6c7334fad080c5704d77216b732)使用1个以太币购买了。接下来，我们将继续在这条链上继续演示。  
+
+注意，truffle develop的控制台不要关，确保我们的测试链在 http://127.0.0.1:9545 启动着，并且部署了智能合约。  
+
+另开一个控制台，输入 `npm run dev`，启动 FleaMarket 服务。  
+![启动服务](Img/3_RunService.png)
+
+服务启动于 http://localhost:8080/ ，打开浏览器输入该地址就可以进入FleaMarke。等待一段时间，网页加载完毕后呈现如下。现在我们就可以浏览到刚刚发布过的《动物农场》信息：售价1以太币，已售出。
+![进入FleaMarket](Img/3_WebInit.png)
+
+### 2. 安装及使用MeatMask  
+
+MetaMask是一个Google浏览器扩展，可以把Chrome变成一个DApp浏览器。它的核心特性是注入以太坊提供的js客户端库web3到每一个界面，来让DApp连接到MetaMask提供的以太坊节点服务。不过这个Chrome扩展，可以允许你管理你的钱包，以及连接到不同的以太坊网络。  
+
+科学上网后打开Chrome的应用商店，搜索MeatMask即可安装。安装后完成登录操作。MeatMask默认连接的是以太坊主网（最上方显示），点击它，选择Custom RPC，添加一个网络：http://127.0.0.1:9545，点确定后，将会连接到我们的测试链。然后点击右上角的用户头像，选择Import Account,导入三个测试账户的地址，并更改名字，用作之后的测试.
+```
+0x627306090abab3a6e1400e9345bc60c78a8bef57 // Accounts[0] -> Mr.0
+0xf17f52151ebef6c7334fad080c5704d77216b732 // Accounts[1] -> XW
+0x6330a553fc93768f612722bb8c2ec78ac90b3bbc // Accounts[8] -> Another XW
+```
+![MeatMask](Img/3_MetaMask.png)
+
+这时我们可以看到三个账户的余额，XW和Mr.0之间完成过一笔交易，XW向Mr.0支付了一个以太币，加上发布商品/购买商品消耗的gas，两者的余额约为 99 / 101 个以太币。
+
+### 3. 发布商品
+
+点击左侧的`I Want to Sell`按钮，会拉下一个信息框，填写好商品信息（不能为空），点击`Sell the Product`即可发布商品。
+![Sell](Img/3_WebSell_1.gif)
+
+填写完消息后，点击发布，MetaMask会弹出窗口提醒你是否支付，确认后发布商品。(此时用户为 AnotherXW )
+![Sell2](Img/3_WebSell_2.gif)
+
+### 4. 购买商品
+
+首先从AnotherXW切换到XW用户，尝试进行购买。
+
+若点击“已售出”的商品，会提示该商品已售出。
+![Sold](Img/3_ProductSold.gif)
+
+若点击“可购买”的商品，会弹窗询问是否确认购买。
+![Buy](Img/3_WebBuy.gif)  
+购买完成后，查看账户余额，可以看到XW用户转账了10个以太币给AnotherXW。XW余额约为89 (90 - 1)，AnotherXW余额约为110 (100 + 1)
+![Check](Img/3_WebCheckBuy.gif)  
+

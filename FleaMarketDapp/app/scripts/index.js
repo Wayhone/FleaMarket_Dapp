@@ -54,17 +54,19 @@ window.BuyProduct = function(pid)
 					console.log("waiting to transact...")
 					contractInstance.buyProduct(pid, {from: web3.eth.accounts[0], value: ethPrice}).then(function(v) {
 						location.reload();	// 刷新商品信息
-					})
-					.catch(function(err) {
+					}).catch(function(err) {
 						err=>{console.warn(err)}
 					});		
 				});
+
+				$('.confirmation-confirm-btn').unbind("click");
 			});
 
 			// 取消购买
 			$('.confirmation-cancel-btn').on("click", function(){ 
 				$(".mask-div").css('display', 'none'); 
 				$('.confirmation').css('display', 'none'); 
+				$('.confirmation-cancel-btn').unbind("click");
 			});
 			
 		})
